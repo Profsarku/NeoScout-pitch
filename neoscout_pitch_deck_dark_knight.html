@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeoScout - The Indeed for AI Agents</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000000;
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .slide h1 {
+            font-size: 4rem;
+            margin-bottom: 30px;
+            color: #ffffff;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-shadow: none;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .slide h2 {
+            font-size: 3rem;
+            margin-bottom: 40px;
+            color: #ffffff;
+            font-weight: 300;
+            letter-spacing: 1px;
+            text-shadow: none;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .slide h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #888888;
+            font-weight: 300;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .slide p, .slide li {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            color: #cccccc;
+            font-weight: 300;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .slide ul {
+            text-align: left;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .slide li {
+            margin-bottom: 20px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .slide li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #ffffff;
+            font-weight: 300;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            border-radius: 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px 20px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .highlight {
+            color: #ffffff;
+            font-weight: 400;
+        }
+
+        .big-number {
+            font-size: 4rem;
+            color: #ffffff;
+            font-weight: 100;
+            text-shadow: none;
+        }
+
+        .contact-info {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            margin-top: 30px;
+        }
+
+        .team-member {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            margin: 20px;
+            border-radius: 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .pricing-tier {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            margin: 15px;
+            border-radius: 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            display: inline-block;
+            min-width: 250px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide:nth-child(1) { background: #000000; }
+        .slide:nth-child(2) { background: #000000; }
+        .slide:nth-child(3) { background: #000000; }
+        .slide:nth-child(4) { background: #000000; }
+        .slide:nth-child(5) { background: #000000; }
+        .slide:nth-child(6) { background: #000000; }
+        .slide:nth-child(7) { background: #000000; }
+        .slide:nth-child(8) { background: #000000; }
+        .slide:nth-child(9) { background: #000000; }
+    </style>
+</head>
+<body>
+    <div class="slide-counter">
+        <span id="current-slide">1</span> / <span id="total-slides">9</span>
+    </div>
+
+    <div class="slide-container" id="slideContainer">
+        <!-- Slide 1: Title -->
+        <div class="slide">
+            <h1>NeoScout</h1>
+            <h2>The Indeed for AI Agents</h2>
+            <p style="font-size: 1.8rem; margin-top: 40px;">Creating an AI Agents HR and Marketplace</p>
+        </div>
+
+        <!-- Slide 2: The Problem -->
+        <div class="slide">
+            <h2>The Problem</h2>
+            <h3>The AI agent market is exploding ($13B by 2030), but there's a critical disconnect:</h3>
+            <ul>
+                <li><span class="highlight">77%</span> of small businesses lack the knowledge to adopt AI</li>
+                <li>Small businesses miss out on cost savings (e.g., <span class="highlight">50%</span> scheduling time reduction)</li>
+                <li>Businesses need specialized AI agents but have <span class="highlight">no centralized marketplace</span> to find, hire, buy,or sell them</li>
+                <li>Developers build powerful agents but <span class="highlight">don't have avenues to monetize</span> them</li>
+                <li>Non-technical creators with great ideas <span class="highlight">lack the skills</span> to create agents and earn income</li>
+            </ul>
+        </div>
+
+        <!-- Slide 3: Our Solution -->
+        <div class="slide">
+            <h2>Our Solution</h2>
+            <h3>NeoScout is the Indeed for AI agents</h3>
+            <p>We've built a three-sided marketplace where:</p>
+            <ul>
+                <li><span class="highlight">Small Businesses</span> post jobs to hire pre-vetted AI agents—reducing labor costs with no technical knowledge required</li>
+                <li><span class="highlight">Developers</span> list pre-vetted agents to be hired and monetize their skills</li>
+                <li><span class="highlight">Creators</span> submit ideas, get paired with developers, and earn via our revenue-sharing model (80% to creators)</li>
+            </ul>
+        </div>
+
+        <!-- Slide 4: Market Opportunity -->
+        <div class="slide">
+            <h2>Market Opportunity</h2>
+            <div style="display: flex; justify-content: space-around; align-items: center; margin: 40px 0;">
+                <div>
+                    <div class="big-number">$13B</div>
+                    <p>AI agent market by 2030</p>
+                </div>
+                <div>
+                    <div class="big-number">31M</div>
+                    <p>Small businesses in the U.S.</p>
+                </div>
+                <div>
+                    <div class="big-number">$930M</div>
+                    <p>Total Addressable Market</p>
+                </div>
+            </div>
+            <p>Assuming 10% adoption and 5 agents per business:<br>
+            3.1M businesses × 5 agents × $5/month × 12 months = <span class="highlight">$930M TAM</span></p>
+        </div>
+
+        <!-- Slide 5: Competitive Advantage -->
+        <div class="slide">
+            <h2>Competitive Advantage</h2>
+            <ul>
+                <li><span class="highlight">Three-sided marketplace</span> creates powerful network effects</li>
+                <li><span class="highlight">Hosted solution</span> requiring no infrastructure for small businesses</li>
+                <li><span class="highlight">Pre-vetted agents</span> ensuring quality and trust</li>
+                <li><span class="highlight">Revenue-sharing model</span> for non-technical creators (80%)</li>
+                <li><span class="highlight">Developer monetization</span> platform with multiple subscription tiers</li>
+            </ul>
+        </div>
+
+        <!-- Slide 6: Business Model -->
+        <div class="slide">
+            <h2>Business Model</h2>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin: 30px 0;">
+                <div class="pricing-tier">
+                    <h3>Job Post Subscriptions</h3>
+                    <p><strong>Basic:</strong> $50/month (5 posts)</p>
+                    <p><strong>Growth:</strong> $150/month (20 posts)</p>
+                    <p><strong>Enterprise:</strong> $500/month (unlimited)</p>
+                </div>
+                <div class="pricing-tier">
+                    <h3>Developer Subscriptions</h3>
+                    <p><strong>Free:</strong> Up to 3 agents, 80% hire revenue</p>
+                    <p><strong>Pro:</strong> $15/month unlimited agents, priority vetting</p>
+                </div>
+                <div class="pricing-tier">
+                    <h3>Creator Subscriptions</h3>
+                    <p><strong>Starter:</strong> $5/month (2 requests, 80% revenue)</p>
+                    <p><strong>Pro:</strong> $20/month (unlimited requests)</p>
+                </div>
+            </div>
+            <p><span class="highlight">Fixed facilitation fees</span> for all agent hires</p>
+        </div>
+
+        <!-- Slide 7: Traction & Roadmap -->
+        <div class="slide">
+            <h2>Traction & Roadmap</h2>
+            <ul>
+                <li>Platform MVP Built <span class="highlight">December 2024</span></li>
+                <li><span class="highlight">Three pilot businesses for customer discovery</span> in discussion</li>
+            </ul>
+            <h3 style="margin-top: 40px;">Next Steps:</h3>
+            <ul>
+                <li>Expand developer network</li>
+                <li>Onboard first <span class="highlight">100 small businesses</span></li>
+                <li>Grow agent listings to <span class="highlight">500+</span></li>
+                <li>Raise seed funding</li>
+            </ul>
+        </div>
+
+        <!-- Slide 8: Team -->
+        <div class="slide">
+            <h2>Team</h2>
+            <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
+                <div class="team-member">
+                    <h3>Enoch Sarku - Founder</h3>
+                    <ul style="text-align: left;">
+                        <li>AI Engineer at Queva Pets</li>
+                        <li>Expert in AI agent implementation</li>
+                        <li>Passionate about democratizing AI for small businesses</li>
+                    </ul>
+                </div>
+                <div class="team-member">
+                    <h3>Jerome Soucy Rousseau - Advisor</h3>
+                    <ul style="text-align: left;">
+                        <li>Co-Founder & VP People at Fight Camp ($100m valuation)</li>
+                        <li>Extensive startup and people operations experience</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Contact -->
+        <div class="slide">
+            <h1>NeoScout</h1>
+            <h3>Where small businesses hire AI, developers monetize skills, and creators earn passive income.</h3>
+            <div class="contact-info">
+                <h3>Connect with us:</h3>
+                <p><strong>Website:</strong> https://neoscout-cd726.web.app</p>
+                <p><strong>Email:</strong> professorsarku@gmail.com</p>
+                <p><strong>Phone:</strong> (253) 973-7004</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" onclick="previousSlide()">← Previous</button>
+        <button class="nav-btn" onclick="nextSlide()">Next →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 9;
+        const slideContainer = document.getElementById('slideContainer');
+        
+        document.getElementById('total-slides').textContent = totalSlides;
+
+        function updateSlideCounter() {
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+        }
+
+        function goToSlide(slideIndex) {
+            if (slideIndex >= 0 && slideIndex < totalSlides) {
+                currentSlide = slideIndex;
+                slideContainer.style.transform = `translateX(-${currentSlide * 100}vw)`;
+                updateSlideCounter();
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                goToSlide(currentSlide + 1);
+            }
+        }
+
+        function previousSlide() {
+            if (currentSlide > 0) {
+                goToSlide(currentSlide - 1);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight' || event.key === ' ') {
+                nextSlide();
+            } else if (event.key === 'ArrowLeft') {
+                previousSlide();
+            } else if (event.key >= '1' && event.key <= '9') {
+                goToSlide(parseInt(event.key) - 1);
+            }
+        });
+
+        // Initialize
+        updateSlideCounter();
+    </script>
+</body>
+</html>
